@@ -5,7 +5,7 @@ var app = express();
 var morgan = require('morgan');
 var nunjucks = require('nunjucks');
 var bodyParser = require('body-parser');
-// var makesRouter = require('./routes/index.js');
+var routes = require('./routes');
 
 // template stuff
 app.engine('html', nunjucks.render);
@@ -26,4 +26,4 @@ var server = app.listen(3000, function() {
 
 app.use(express.static('public'));
 
-app.use('/', require('../routes'));
+app.use('/', routes);

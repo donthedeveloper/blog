@@ -1,0 +1,44 @@
+body {
+/*   font-family: 'Raleway', sans-serif; */
+/*   font-family: 'Open Sans', sans-serif; */
+/*   font-family: 'Montserrat', sans-serif; */
+/*   font-family: 'Merriweather', serif; */
+/*   font-family: 'Droid Sans', sans-serif; */
+}
+
+.post {
+  text-align: center;
+  padding: 5rem 9rem;
+}
+
+.post p {
+  line-height: 1.5;
+  font-size: 16px;
+  font-family: 'Merriweather', serif;
+}
+
+.post h2 {
+  font-family: 'Montserrat', serif;
+}
+
+.post hr {
+  width: 50px;
+  border-width: 2px 0 1px;
+  border-color: #fff;
+  border-style: solid;
+/*   border: 2px solid #fff; */
+}
+
+.guest {
+  background-color: #f05f40;
+  color: #E0FFFF;
+}
+
+.fullstack {
+  background-color: #222;
+  color: #fff;
+}
+
+.fullstack h2 {
+  color: #E13B3A;
+}
