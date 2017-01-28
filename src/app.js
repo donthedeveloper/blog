@@ -10,7 +10,7 @@ var routes = require('./routes');
 // template stuff
 app.engine('html', nunjucks.render);
 app.set('view engine', 'html');
-nunjucks.configure('views', { noCache: true });
+nunjucks.configure('views', {noCache: true});
 
 // logging
 app.use(morgan('dev'));
