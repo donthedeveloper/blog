@@ -2,7 +2,7 @@ var Sequelize = require('sequelize');
 var db = new Sequelize('postgres://localhost:5432/blog');
 var marked = require('marked');
 
-var Post = db.define('post', {
+var Post = db.define('posts', {
   title: {
     type: Sequelize.STRING,
     allowNull: false
@@ -10,6 +10,9 @@ var Post = db.define('post', {
   urlTitle: {
     type: Sequelize.STRING,
     allowNull: false
+  },
+  intro: {
+    type: Sequelize.TEXT
   },
   content: {
     type: Sequelize.TEXT,
@@ -30,6 +33,32 @@ var Post = db.define('post', {
   }
 });
 
+var User = db.define('users', {
+  firstname: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  lastname: {
+    type: Sequelize.STRING,
+    allowNull: true
+  },
+  email: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    unique: true,
+    isEmail: true
+  },
+  contacts: {
+    type: Sequelize.ARRAY(Sequelize.STRING),
+    allowNull: true
+  }
+});
+
+User.belongsTo(Post, {
+  as: 'author'
+});
+
 module.exports = {
-  Post: Post
+  Post: Post,
+  User: User
 }
