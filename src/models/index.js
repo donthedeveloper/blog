@@ -2,7 +2,7 @@ var Sequelize = require('sequelize');
 var db = new Sequelize('postgres://localhost:5432/blog');
 var marked = require('marked');
 
-var Post = db.define('posts', {
+var Post = db.define('post', {
   title: {
     type: Sequelize.STRING,
     allowNull: false
@@ -22,7 +22,7 @@ var Post = db.define('posts', {
   hooks: {
     beforeValidate: function(post) {
       if (post.title) {
-        page.urlTitle = page.title.replace(/\s+/g, '-').replace(/\W/g, '');
+        post.urlTitle = post.title.replace(/\s+/g, '-').replace(/\W/g, '');
       }
     }
   },
@@ -33,7 +33,7 @@ var Post = db.define('posts', {
   }
 });
 
-var User = db.define('users', {
+var User = db.define('user', {
   firstname: {
     type: Sequelize.STRING,
     allowNull: false
@@ -54,11 +54,21 @@ var User = db.define('users', {
   }
 });
 
-User.belongsTo(Post, {
+var Fire = db.define('fire', {
+  fireAtLeftDoor: {
+    type: Sequelize.BOOLEAN
+  },
+  fireAtRightDoor: {
+    type: Sequelize.BOOLEAN
+  }
+});
+
+Post.belongsTo(User, {
   as: 'author'
 });
 
 module.exports = {
   Post: Post,
-  User: User
+  User: User,
+  Fire: Fire
 }

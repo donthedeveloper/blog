@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const db = new Sequelize('postgres://localhost:5432/blog');
 
-const Promise = require('bluebird');
+// const Promise = require('bluebird');
 
 const models = require('./src/models');
 const Post = models.Post;
@@ -11,7 +11,7 @@ var users = [
   {
     firstname: "Don",
     lastname: "Hansen",
-    email: "donhansen347@gmail.com",
+    email: "test@gmail.com",
     contacts: ['developerdontv']
   }
 ];
@@ -23,30 +23,28 @@ var posts = [
     content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
   },
   {
-    title: "Guest Post",
+    title: "First week at Fullstack Academy",
     intro: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
   },
   {
-    title: "Guest Post",
+    title: "IDK Post",
     intro: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
   }
 ];
 
-db.sync({ })
+User.sync({ force: true })
 .then(function() {
-  console.log("Dropped old data.");
-  
-  return Promise.map(users, function(user) {
-    return User.create(user);
-  });
+  return Post.sync({ force: true })
 })
-.then(function(users) {
-  
+.then(function() {
+  console.log("Dropped old data."); 
+  return User.create(users[0]);
+})
+.then(function() {
+  console.log('\n\n SUCCESS \n\n');
 })
 .catch(function(err) {
   console.error('There was totally a problem', err, err.stack);
 });
-
-console.log('hey');

@@ -5,33 +5,26 @@ const models = require('../models');
 const Post = models.Post;
 const User = models.User;
 
-router.get('/', (req, res) => {
-//   var posts = Post.findAll(function(posts) {
-//     return posts;
-//   })
-//   .catch(function(err) {
-//     console.error(err);
-//   });
-  
+router.get('/', (req, res) => { 
   res.render('index', { });
 });
 
-// router.get('/:title', (req, res) => {
-//   const posts;
-//   const title = req.params.title;
+router.get('/:title', (req, res) => {
+  const title = req.params.title;
   
-//   // Post.findOne
+  Post.findOne({
+    where: {
+      urlTitle: title
+    }
+  })
+  .then(function(post) {
+    console.log(post);
+    res.send(post);
+  })
+  .catch(function(err) {
+    console.error(err);
+  });
   
-//   var posts = Post.findOne(function(post) {
-//     return post
-//   })
-//   .catch(function(err) {
-//     console.error(err);
-//   });
-  
-//   posts = [posts];
-  
-//   res.render('index', { posts: posts });
-// });
+});
 
 module.exports = router;
