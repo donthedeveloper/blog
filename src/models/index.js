@@ -9,7 +9,7 @@ var Post = db.define('post', {
   },
   urlTitle: {
     type: Sequelize.STRING,
-    allowNull: false
+    defaultValue: null
   },
   intro: {
     type: Sequelize.TEXT
@@ -20,10 +20,12 @@ var Post = db.define('post', {
   }
 }, {
   hooks: {
-    beforeValidate: function(post) {
-      if (post.title) {
-        post.urlTitle = post.title.replace(/\s+/g, '-').replace(/\W/g, '');
-      }
+    beforeBulkCreate: function(posts, options) {
+      console.log('asdfkljasfdlkasjdflaskdf\n\n\n\n\n');
+      posts.forEach(function(post) {
+        post.urlTitle = post.title.replace(/\s+/g, '-');
+      });
+      console.log('hey');
     }
   },
   getterMethods: {
@@ -45,21 +47,12 @@ var User = db.define('user', {
   email: {
     type: Sequelize.STRING,
     allowNull: false,
-    unique: true,
+    // unique: true,
     isEmail: true
   },
   contacts: {
     type: Sequelize.ARRAY(Sequelize.STRING),
     allowNull: true
-  }
-});
-
-var Fire = db.define('fire', {
-  fireAtLeftDoor: {
-    type: Sequelize.BOOLEAN
-  },
-  fireAtRightDoor: {
-    type: Sequelize.BOOLEAN
   }
 });
 
@@ -70,5 +63,5 @@ Post.belongsTo(User, {
 module.exports = {
   Post: Post,
   User: User,
-  Fire: Fire
+  db: db
 }

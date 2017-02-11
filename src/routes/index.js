@@ -1,12 +1,25 @@
 'use strict';
 const express = require('express');
 const router = express.Router();
+
 const models = require('../models');
 const Post = models.Post;
 const User = models.User;
 
-router.get('/', (req, res) => { 
-  res.render('index', { });
+const chalk = require('chalk');
+
+router.get('/', (req, res) => {
+  
+  Post.findAll()
+  .then(function(posts) {
+    console.log(chalk.green('Successfully retrieved posts from database.'));
+    res.render('index', { posts: posts });
+  })
+  .catch(function(err) {
+    console.error(err);
+    res.send();
+  });
+  
 });
 
 router.get('/:title', (req, res) => {
@@ -23,6 +36,7 @@ router.get('/:title', (req, res) => {
   })
   .catch(function(err) {
     console.error(err);
+    res.send();
   });
   
 });
