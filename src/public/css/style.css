@@ -7,6 +7,27 @@ body {
   background-color: #fcfdff;
 }
 
+nav {
+  background-color: #222;
+  color: #fff;
+  font-size: 16px;
+  margin-bottom: 5rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+nav ul {
+  display: inline-block;
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0 auto;
+}
+
+nav li {
+  display: inline-block;
+  padding: 1rem 0;
+}
+
 .nav h1, 
 .nav ul, 
 .nav li {
